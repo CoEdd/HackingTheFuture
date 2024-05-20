@@ -1,6 +1,6 @@
 # HackingTheFuture
 
-# run this command on "Hacking into the future\my-app"  -  npm run dev 
+run this command on "Hacking into the future\my-app"  -  npm run dev 
 
 current bug 
 1) login case sensitive

@@ -15,5 +15,6 @@ remaining task
 2) logo design (sub the sitemark)
 <!-- 3) trip booking page -->
 <!-- 4) past booking -->
-<!-- 5) Marks calculation -->
+5) Marks calculation
 <!-- 6) Add parent name in child page -->
+7) password hashing

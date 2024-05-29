@@ -16,16 +16,16 @@ public class RelationEntity {
 
     private String useremail;
     private String friendemail;
-    private String parentemail;
+    private String childemail;
     private String status;
 
     public RelationEntity() {
     }
 
-    public RelationEntity(String useremail, String friendemail, String parentemail, String status) {
+    public RelationEntity(String useremail, String friendemail, String childemail, String status) {
         this.useremail = useremail;
         this.friendemail = friendemail;
-        this.parentemail = parentemail;
+        this.childemail = childemail;
         this.status = status;
     }
 
@@ -53,12 +53,12 @@ public class RelationEntity {
         this.friendemail = friendemail;
     }
 
-    public String getParentmail() {
-        return parentemail;
+    public String getChildmail() {
+        return childemail;
     }
 
-    public void setParentemail(String parentemail) {
-        this.parentemail = parentemail;
+    public void setChildemail(String childemail) {
+        this.childemail = childemail;
     }
 
     public String getStatus() {

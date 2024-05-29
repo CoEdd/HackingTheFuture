@@ -7,11 +7,10 @@ import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import AppAppBar from '../educatorpage/components/AppAppBar';
-import Hero from '../educatorpage/components/Hero';
-import LogoCollection from '../educatorpage/components/LogoCollection';
-import Highlights from '../educatorpage/components/Highlights';
-import Features from '../educatorpage/components/Features';
-import Testimonials from '../educatorpage/components/Testimonials';
+import Welcome from './components/Welcome';
+import Discussion from './components/Discussion';
+import EducatorManagement from './components/EducatorManagement';
+import Leaderboard from './components/Leaderboard';
 import FAQ from '../educatorpage/components/FAQ';
 import Footer from '../educatorpage/components/Footer';
 import getLPTheme from '../educatorpage/getLPTheme';
@@ -40,7 +39,7 @@ export default function LandingPage() {
         const data = await response.json();
         if (data && data.length > 0) {
           // Check if any event in the response matches the date 31/08/2024
-          const event = data.find(event => event.eventDate === '08/31/2024');
+          const event = data.find(event => event.eventDate === '2024-08-31');
           if (event) {
             setEventDetail(event);
           } else {
@@ -94,7 +93,7 @@ export default function LandingPage() {
     <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
       <CssBaseline />
       <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
-      <Hero />
+      <Welcome />
       <Box sx={{ bgcolor: 'background.default' }}>
         <Box sx={{ bgcolor: 'background.default', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Box sx={{ width: '50%', textAlign: 'center' }}>
@@ -132,14 +131,11 @@ export default function LandingPage() {
           </Box>
         </div>
 
-        
-
-        <LogoCollection />
-        <Features />
+        <EducatorManagement />
         <Divider />
-        <Testimonials />
+        <Leaderboard />
         <Divider />
-        <Highlights />
+        <Discussion />
         <Divider />
         <FAQ />
         <Divider />
@@ -178,11 +174,6 @@ function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
           },
         }}
       >
-        {/* <ToggleButton value>
-          <AutoAwesomeRoundedIcon sx={{ fontSize: '20px', mr: 1 }} />
-          Custom theme
-        </ToggleButton> */}
-        {/* <ToggleButton value={false}>Material Design 2</ToggleButton> */}
       </ToggleButtonGroup>
     </Box>
   );

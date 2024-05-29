@@ -23,14 +23,11 @@ public class ProgramJoinEntity {
     private String quizTheme;
     private String quizDescription;
     private String quizContent;
-
     private String bookedByParent;
 
-        public ProgramJoinEntity() {
+    public ProgramJoinEntity() {
     }
 
-
-    
     public String getEmailRegister() {
         return emailRegister;
     }
@@ -47,7 +44,6 @@ public class ProgramJoinEntity {
         this.eventTitle = eventTitle;
     }
 
-
     public String getEventDate() {
         return eventDate;
     }
@@ -55,7 +51,6 @@ public class ProgramJoinEntity {
     public void setEventDate(String eventDate) {
         this.eventDate = eventDate;
     }
-
 
     public String getEventVenue() {
         return eventVenue;
@@ -65,7 +60,6 @@ public class ProgramJoinEntity {
         this.eventVenue = eventVenue;
     }
 
-
     public String getEventDescription() {
         return eventDescription;
     }
@@ -73,7 +67,6 @@ public class ProgramJoinEntity {
     public void setEventDescription(String eventDescription) {
         this.eventDescription = eventDescription;
     }
-
 
     public String getEventTime() {
         return eventTime;
@@ -83,7 +76,6 @@ public class ProgramJoinEntity {
         this.eventTime = eventTime;
     }
 
-
     public String getQuizTitle() {
         return quizTitle;
     }
@@ -91,7 +83,6 @@ public class ProgramJoinEntity {
     public void setQuizTitle(String quizTitle) {
         this.quizTitle = quizTitle;
     }
-
 
     public String getQuizTheme() {
         return quizTheme;
@@ -101,7 +92,6 @@ public class ProgramJoinEntity {
         this.quizTheme = quizTheme;
     }
 
-
     public String getQuizDescription() {
         return quizDescription;
     }
@@ -109,7 +99,6 @@ public class ProgramJoinEntity {
     public void setQuizDescription(String quizDescription) {
         this.quizDescription = quizDescription;
     }
-
 
     public String getQuizContent() {
         return quizContent;
@@ -119,7 +108,6 @@ public class ProgramJoinEntity {
         this.quizContent = quizContent;
     }
 
-
     public String getBookedByParent() {
         return bookedByParent;
     }
@@ -127,8 +115,4 @@ public class ProgramJoinEntity {
     public void setBookedByParent(String bookedByParent) {
         this.bookedByParent = bookedByParent;
     }
-
-
-    // Getters and Setters
-    // ... (Add getters and setters for each field)
 }

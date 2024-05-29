@@ -11,10 +11,13 @@ public interface RelationService {
     void deleteRelation(long id);
     List<RelationEntity> getRelationsByUseremail(String useremail);
     List<RelationEntity> getRelationsByFriendemail(String friendemail);
-    List<RelationEntity> getRelationsByParentemail(String parentemail);
+    List<RelationEntity> getRelationsByChildemail(String childemail);
     boolean relationExists(String useremail, String friendemail);
     List<RelationEntity> getPendingRelationsByUseremail(String useremail);
     RelationEntity updateRelationStatus(long id, String status);
-    List<RelationEntity> getPendingRelationsByFriendemail(String friendemail);  // Added method
-    // List<RelationEntity> getPendingRelationsByFriendemail(String friendemail);
+    List<RelationEntity> getPendingRelationsByFriendemail(String friendemail);
+    boolean childEmailExists(String childemail);
+    String getParentNameByChildEmail(String childemail);
+    
+
 }

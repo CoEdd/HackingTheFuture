@@ -10,12 +10,11 @@ import java.util.List;
 public interface RelationRepository extends JpaRepository<RelationEntity, Long> {
     List<RelationEntity> findByUseremail(String useremail);
     List<RelationEntity> findByFriendemail(String friendemail);
-    List<RelationEntity> findByParentemail(String parentemail);
-    List<RelationEntity> findByUseremailAndFriendemail(String useremail, String friendemail);  // New method
-    List<RelationEntity> findByUseremailAndStatus(String useremail, String status);  // New method
+    List<RelationEntity> findByChildemail(String childemail);
+    List<RelationEntity> findByUseremailAndFriendemail(String useremail, String friendemail);
+    List<RelationEntity> findByUseremailAndStatus(String useremail, String status);
     boolean existsByUseremailAndFriendemail(String useremail, String friendemail);
-    List<RelationEntity> findByFriendemailAndStatus(String friendemail, String string);
-    // List<RelationEntity> findByFriendemailAndStatus(String friendemail, String status);
+    List<RelationEntity> findByFriendemailAndStatus(String friendemail, String status);
+
+    
 }
-
-

@@ -11,5 +11,6 @@ import com.backend.hackingfuture.entity.ProgramJoinEntity;
 public interface ProgramJoinRepository extends JpaRepository<ProgramJoinEntity, Long> {
     List<ProgramJoinEntity> findByEmailRegisterAndEventTitle(String emailRegister, String eventTitle);
     List<ProgramJoinEntity> findByEventDate(String eventDate); // Add this method
+    List<ProgramJoinEntity> findByEmailRegister(String emailRegister);
     
 }

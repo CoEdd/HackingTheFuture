@@ -15,7 +15,7 @@ import com.backend.hackingfuture.utils.CoordinateUtils;
 @Service
 public class UserServiceImpl implements UserService {
     
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -26,9 +26,11 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(user, userEntity);
 
-        // Assign random coordinates
-        String randomCoordinate = CoordinateUtils.generateRandomCoordinate();
-        userEntity.setStudentcoordinate(randomCoordinate);
+        // Assign random coordinates if not already set
+        if (userEntity.getStudentcoordinate() == null) {
+            String randomCoordinate = CoordinateUtils.generateRandomCoordinate();
+            userEntity.setStudentcoordinate(randomCoordinate);
+        }
         
         userRepository.save(userEntity);
         return user;
@@ -96,6 +98,11 @@ public class UserServiceImpl implements UserService {
 
     public Optional<UserEntity> getUserByEmail(String emailId) {
         return userRepository.findByEmailId(emailId);
+    }
+
+    @Override
+    public void saveUserPoints(UserEntity user) {
+        userRepository.save(user);
     }
 
 

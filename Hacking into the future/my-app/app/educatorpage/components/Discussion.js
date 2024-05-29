@@ -32,13 +32,13 @@ function EditToolbar({ setRows, setRowModesModel, name }) {
   return (
     <GridToolbarContainer>
       <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add record
+        Add discussion
       </Button>
     </GridToolbarContainer>
   );
 }
 
-export default function Highlights() {
+export default function Discussion() {
   const theme = useTheme();
   const searchParams = useSearchParams();
   const name = searchParams.get("Name");
@@ -166,7 +166,7 @@ export default function Highlights() {
 
   return (
     <Box
-      id="highlights"
+      id="discussion"
       sx={{
         pt: { xs: 4, sm: 12 },
         pb: { xs: 8, sm: 16 },

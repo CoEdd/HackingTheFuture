@@ -20,28 +20,28 @@ const items = [
     icon: <ViewQuiltRoundedIcon />,
     title: 'Event / Quiz Page',
     description:
-      'This is where you can look for an event to register for your child.',
+      'This is a page where the Events and the Quizzes created by the educator are displayed. ',
     imageLight: 'url("/static/images/templates/templates-images/dash-light.png")',
     imageDark: 'url("/static/images/templates/templates-images/dash-dark.png")',
-    path: '/registerprogram',
+    path: '/eventpage',
   },
   {
     icon: <EdgesensorHighRoundedIcon />,
-    title: 'Events Registered / Quizzes Done',
+    title: 'Trip Booking Page',
     description:
-      'This is where you can see the upcoming events that you have registered and the quizzes that you have done.',
+      'This is where you can book a trip for your beloved children.',
     imageLight: 'url("/static/images/templates/templates-images/mobile-light.png")',
     imageDark: 'url("/static/images/templates/templates-images/mobile-dark.png")',
-    path: '/programdone',
+    path: '/tripbookingpage',
   },
   {
     icon: <DevicesRoundedIcon />,
-    title: 'View Friends',
+    title: 'View Child',
     description:
-      'This is where you can see your friend progress and find some motivation to be actively participate in an events and attempting quizzes.',
+      'This is where you can see the list of your children.',
     imageLight: 'url("/static/images/templates/templates-images/devices-light.png")',
     imageDark: 'url("/static/images/templates/templates-images/devices-dark.png")',
-    path: '/friend',
+    path: '/viewchild',
   },
 ];
 

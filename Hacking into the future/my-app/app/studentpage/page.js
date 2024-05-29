@@ -32,6 +32,7 @@ export default function LandingPage() {
     studentCoordinate: '',
     studentPoint: 0,
     ranking: 0,
+    parentName: '',
   });
 
   const searchParams = useSearchParams();
@@ -41,6 +42,7 @@ export default function LandingPage() {
   useEffect(() => {
     fetchEventDetail();
     fetchUserDetails();
+    fetchParentName();
   }, [email]);
 
   const fetchEventDetail = async () => {
@@ -48,7 +50,7 @@ export default function LandingPage() {
       const response = await fetch(`http://localhost:8080/api/v1/events`);
       if (response.ok) {
         const data = await response.json();
-        const event = data.find(event => event.eventDate === '08/31/2024');
+        const event = data.find(event => event.eventDate === '2024-08-31');
         if (event) {
           setEventDetail(event);
         } else {
@@ -74,11 +76,12 @@ export default function LandingPage() {
           const rankedData = await rankResponse.json();
           const userRank = rankedData.find(user => user.email === email);
           if (userRank) {
-            setStudentData({
+            setStudentData(prevData => ({
+              ...prevData,
               studentCoordinate: studentcoordinate,
               studentPoint: studentpoint,
               ranking: userRank.id,
-            });
+            }));
           } else {
             console.error('User rank not found');
           }
@@ -90,6 +93,23 @@ export default function LandingPage() {
       }
     } catch (error) {
       console.error('Error fetching user details:', error);
+    }
+  };
+
+  const fetchParentName = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/v1/relations/parent/${email}`);
+      if (response.ok) {
+        const parentName = await response.text();
+        setStudentData(prevData => ({
+          ...prevData,
+          parentName,
+        }));
+      } else {
+        console.error('Failed to fetch parent name');
+      }
+    } catch (error) {
+      console.error('Error fetching parent name:', error);
     }
   };
 
@@ -113,6 +133,9 @@ export default function LandingPage() {
         </Typography>
         <Typography sx={{ mb: 1 }} color="text.primary">
           Ranking No = {studentData.ranking}
+        </Typography>
+        <Typography sx={{ mb: 1 }} color="text.primary">
+          Parent Email = {studentData.parentName}
         </Typography>
       </CardContent>
     </React.Fragment>

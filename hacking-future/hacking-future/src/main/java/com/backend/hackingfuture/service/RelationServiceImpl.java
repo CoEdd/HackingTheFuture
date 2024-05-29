@@ -59,16 +59,16 @@ public class RelationServiceImpl implements RelationService {
     }
 
     @Override
-    public List<RelationEntity> getRelationsByParentemail(String parentemail) {
-        return relationRepository.findByParentemail(parentemail);
+    public List<RelationEntity> getRelationsByChildemail(String childemail) {
+        return relationRepository.findByChildemail(childemail);
     }
 
     @Override
     public boolean relationExists(String useremail, String friendemail) {
-        List<RelationEntity> relations = relationRepository.findByUseremailAndFriendemail(useremail, friendemail);
-        return !relations.isEmpty();
+        return relationRepository.existsByUseremailAndFriendemail(useremail, friendemail);
     }
 
+    @Override
     public List<RelationEntity> getPendingRelationsByUseremail(String useremail) {
         return relationRepository.findByUseremailAndStatus(useremail, "pending");
     }
@@ -84,14 +84,26 @@ public class RelationServiceImpl implements RelationService {
         return null;
     }
 
-    // @Override
-    // public List<RelationEntity> getPendingRelationsByFriendemail(String friendemail) {
-    //     return relationRepository.findByFriendemailAndStatus(friendemail, "pending");
-    // }
-
     @Override
     public List<RelationEntity> getPendingRelationsByFriendemail(String friendemail) {
         return relationRepository.findByFriendemailAndStatus(friendemail, "pending");
     }
-}
 
+    @Override
+    public boolean childEmailExists(String childemail) {
+        List<RelationEntity> relations = relationRepository.findByChildemail(childemail);
+        return !relations.isEmpty();
+    }
+
+    @Override
+    public String getParentNameByChildEmail(String childemail) {
+        List<RelationEntity> relations = relationRepository.findByChildemail(childemail);
+        if (!relations.isEmpty()) {
+            return relations.get(0).getUseremail(); // Assuming the first relation is the parent
+        }
+        return null;
+    }
+
+    
+    
+}

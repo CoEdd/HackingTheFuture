@@ -23,5 +23,8 @@ public interface UserService {
     void assignRandomCoordinatesToUser(Long id);
 
     Optional<UserEntity> getUserByEmail(String emailId);
+
+        // New method to save user points
+        void saveUserPoints(UserEntity user);
     
 }

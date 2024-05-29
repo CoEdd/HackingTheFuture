@@ -42,8 +42,10 @@ export default function Testimonials() {
   const creatorEmail = searchParams.get("email");
 
   const handleClickOpen = (user) => {
-    setSelectedUser(user);
-    setOpen(true);
+    if (user.email !== creatorEmail) {
+      setSelectedUser(user);
+      setOpen(true);
+    }
   };
 
   const handleClose = () => {

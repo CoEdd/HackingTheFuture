@@ -177,7 +177,7 @@ export default function AddressForm() {
         <OutlinedInput
           id="eventdate"
           name="eventDate"
-          type="text"
+          type="date"
           placeholder="03/31/2024 (mm/dd/yyyy)"
           autoComplete="State"
           value={formData.eventDate}

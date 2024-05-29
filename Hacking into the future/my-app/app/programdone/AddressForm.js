@@ -58,7 +58,7 @@ export default function AddressForm() {
 
         const filteredEventData = response.data
           .filter(event => event.emailRegister === creatorEmail)
-          .filter(event => event.eventTitle && event.eventDescription && event.eventVenue && event.eventDate && event.eventTime);
+          .filter(event => event.eventVenue && event.eventDate );
 
         setRows(filteredEventData.map(event => ({ ...event, id: event.id || randomId() })));
       } catch (error) {

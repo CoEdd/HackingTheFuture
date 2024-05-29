@@ -68,5 +68,9 @@ public class ProgramJoinController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedProgramJoin);
     }
 
-    
+    @GetMapping("/program_join/check_clash")
+    public ResponseEntity<Boolean> checkEventClash(@RequestParam String emailRegister, @RequestParam String eventDate) {
+        boolean isClashing = programJoinService.isEventClashing(eventDate, emailRegister);
+        return ResponseEntity.ok(isClashing);
+    }
 }

@@ -1,37 +1,18 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardContent from '@mui/material/CardContent';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import { useTheme } from '@mui/system';
+import {
+  Container, Box, Typography, Button, Dialog,
+  DialogActions, DialogContent, DialogContentText,
+  DialogTitle
+} from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { useState, useEffect } from 'react';
-
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-
 import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
 
 const columns = [
   { field: 'id', headerName: 'Ranking No.', sortable: false, width: 130 },
   { field: 'username', headerName: 'User Name', sortable: false, width: 500 },
-  {
-    field: 'email',
-    headerName: 'Email',
-    description: 'This column ',
-    sortable: false,
-    width: 350,
-  },  
+  { field: 'email', headerName: 'Email', sortable: false, width: 350 },
   { field: 'studentPoint', headerName: 'Current Point', sortable: false, width: 110 },
 ];
 
@@ -40,6 +21,7 @@ export default function Testimonials() {
   const [selectedUser, setSelectedUser] = useState(null);
   const searchParams = useSearchParams();
   const creatorEmail = searchParams.get("email");
+  const [rows, setRows] = useState([]);
 
   const handleClickOpen = (user) => {
     setSelectedUser(user);
@@ -51,16 +33,11 @@ export default function Testimonials() {
     setSelectedUser(null);
   };
 
-  const [rows, setRows] = useState([]);
-  const theme = useTheme();
-
   useEffect(() => {
     const fetchRankedUsers = async () => {
       try {
         const response = await fetch('http://localhost:8080/api/v1/users/ranked');
-        if (!response.ok) {
-          throw new Error('Failed to fetch ranked users');
-        }
+        if (!response.ok) throw new Error('Failed to fetch ranked users');
         const data = await response.json();
         setRows(data);
       } catch (error) {
@@ -75,31 +52,35 @@ export default function Testimonials() {
     handleClickOpen(params.row);
   };
 
-  const addFriend = async () => {
+  const addChild = async () => {
     if (selectedUser) {
       try {
-        // Check if the friend request already exists
-        const checkResponse = await axios.get(`http://localhost:8080/api/v1/relations/check`, {
-          params: {
-            useremail: creatorEmail,
-            friendemail: selectedUser.email
-          }
+        const checkResponse = await axios.get('http://localhost:8080/api/v1/relations/check', {
+          params: { useremail: creatorEmail, friendemail: selectedUser.email }
         });
 
-        if (checkResponse.data.exists) {
-          alert('Your friend request is pending');
+        if (checkResponse.data) {
+          alert('This user is already added or request is pending');
         } else {
-          // Send the friend request
-          const response = await axios.post('http://localhost:8080/api/v1/relations', {
-            useremail: creatorEmail,
-            friendemail: selectedUser.email,
-            status: 'pending',
+          const checkChildResponse = await axios.get('http://localhost:8080/api/v1/relations/child/check', {
+            params: { childemail: selectedUser.email }
           });
-          console.log('Friend request sent:', response.data);
+
+          if (checkChildResponse.data) {
+            alert('This child belongs to another user.');
+          } else {
+            const response = await axios.post('http://localhost:8080/api/v1/relations', {
+              useremail: creatorEmail,
+              childemail: selectedUser.email,
+              status: 'childpending',
+            });
+            alert("Your request is still in process. Ask your child to approve you as a parent.");
+            console.log('Child request sent:', response.data);
+          }
         }
         handleClose();
       } catch (error) {
-        console.error('Error sending friend request:', error);
+        console.error('Error sending child request:', error);
       }
     }
   };
@@ -110,28 +91,19 @@ export default function Testimonials() {
       sx={{
         pt: { xs: 4, sm: 12 },
         pb: { xs: 8, sm: 16 },
-        position: 'relative',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         gap: { xs: 3, sm: 6 },
       }}
     >
-      <Box
-        sx={{
-          width: { sm: '100%', md: '60%' },
-          textAlign: { sm: 'left', md: 'center' },
-        }}
-      >
+      <Box sx={{ width: { sm: '100%', md: '60%' }, textAlign: { sm: 'left', md: 'center' } }}>
         <Typography component="h2" variant="h4" color="text.primary">
           Global Leaderboard
         </Typography>
         <Typography variant="body1" color="text.secondary">
-        🌟 Ready to showcase your brilliance?
-        Introducing our dynamic leaderboard, where every point earned is a testament to your knowledge and engagement! 
-        Participate in quizzes, dive into events, and watch your points soar as you outsmart the competition.
-        Join our vibrant community of thinkers and doers, where your contributions are celebrated and rewarded. 
-        Are you ready to take the lead? The leaderboard awaits your next move! 🏆✨
+          🌟 Ready to showcase your brilliance? Introducing our dynamic leaderboard, where every point earned is a testament to your knowledge and engagement!
+          Participate in quizzes, dive into events, and watch your points soar as you outsmart the competition. Join our vibrant community of thinkers and doers, where your contributions are celebrated and rewarded. Are you ready to take the lead? The leaderboard awaits your next move! 🏆✨
         </Typography>
       </Box>
 
@@ -140,9 +112,7 @@ export default function Testimonials() {
           rows={rows}
           columns={columns}
           initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 10 },
-            },
+            pagination: { paginationModel: { page: 0, pageSize: 10 } },
           }}
           pageSizeOptions={[10]}
           onRowClick={handleRowClick}
@@ -156,15 +126,13 @@ export default function Testimonials() {
           component: 'form',
           onSubmit: (event) => {
             event.preventDefault();
-            addFriend();
+            addChild();
           },
         }}
       >
         <DialogTitle>User Details</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Here are the details of the selected user:
-          </DialogContentText>
+          <DialogContentText>Here are the details of the selected user:</DialogContentText>
           {selectedUser && (
             <>
               <Typography variant="h6">Name: {selectedUser.username}</Typography>
@@ -175,7 +143,7 @@ export default function Testimonials() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
-          <Button type="submit">Add Friend</Button>
+          <Button type="submit">Add Child</Button>
         </DialogActions>
       </Dialog>
     </Container>

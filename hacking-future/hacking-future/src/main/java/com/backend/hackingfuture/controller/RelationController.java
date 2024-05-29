@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/relations")
@@ -60,9 +61,13 @@ public class RelationController {
         return relationService.getRelationsByFriendemail(friendemail);
     }
 
-    @GetMapping("/parent/{parentemail}")
-    public List<RelationEntity> getRelationsByParentemail(@PathVariable String parentemail) {
-        return relationService.getRelationsByParentemail(parentemail);
+    @GetMapping("/child/{useremail}")
+    public ResponseEntity<List<RelationEntity>> getChildRelationsByUseremail(@PathVariable String useremail) {
+        List<RelationEntity> relations = relationService.getRelationsByUseremail(useremail);
+        List<RelationEntity> filteredRelations = relations.stream()
+                .filter(relation -> "childpending".equals(relation.getStatus()))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(filteredRelations);
     }
 
     @GetMapping("/check")
@@ -83,6 +88,21 @@ public class RelationController {
         RelationEntity updatedRelation = relationService.updateRelationStatus(id, status);
         if (updatedRelation != null) {
             return ResponseEntity.ok(updatedRelation);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/child/check")
+    public ResponseEntity<?> checkChildEmailExists(@RequestParam String childemail) {
+        boolean exists = relationService.childEmailExists(childemail);
+        return ResponseEntity.ok(exists);
+    }
+
+    @GetMapping("/parent/{childemail}")
+    public ResponseEntity<String> getParentNameByChildEmail(@PathVariable String childemail) {
+        String parentName = relationService.getParentNameByChildEmail(childemail);
+        if (parentName != null) {
+            return ResponseEntity.ok(parentName);
         }
         return ResponseEntity.notFound().build();
     }

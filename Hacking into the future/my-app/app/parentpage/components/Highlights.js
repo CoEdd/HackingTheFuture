@@ -32,7 +32,7 @@ function EditToolbar({ setRows, setRowModesModel, name }) {
   return (
     <GridToolbarContainer>
       <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add record
+        Add discussion
       </Button>
     </GridToolbarContainer>
   );

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.hackingfuture.entity.UserEntity;
@@ -102,4 +103,42 @@ public class UserController {
         return ResponseEntity.ok(rankedUserData);
     }
 
+    @GetMapping("/distance")
+    public ResponseEntity<Double> getDistance(
+            @RequestParam String email,
+            @RequestParam String venueName) {
+
+        Optional<UserEntity> user = userService.getUserByEmail(email);
+        if (user.isPresent()) {
+            String[] userCoords = user.get().getStudentcoordinate().split(",");
+            double userLat = Double.parseDouble(userCoords[0]);
+            double userLng = Double.parseDouble(userCoords[1]);
+
+            Map<String, double[]> venues = Map.of(
+                "Petrosains Science Discovery Centre", new double[]{-133.24, -12.33},
+                "Tech Dome Penang", new double[]{20.87, 9.63},
+                "Agro Technology Park in MARDI", new double[]{-23.28, 16.55},
+                "National Science Centre", new double[]{-90.02, 226.48},
+                "Marine Aquarium and Museum", new double[]{27.51, -136.98},
+                "Pusat Sains & Kreativiti Terengganu", new double[]{263.99, -57.31},
+                "Biomedical Museum", new double[]{96.68, 127.54},
+                "Telegraph Museum", new double[]{7.02, -359.28},
+                "Penang Science Cluster", new double[]{21.33, -0.59}
+            );
+
+            if (venues.containsKey(venueName)) {
+                double[] venueCoords = venues.get(venueName);
+                double distance = calculateEuclideanDistance(userLat, userLng, venueCoords[0], venueCoords[1]);
+                return ResponseEntity.ok(distance);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    private double calculateEuclideanDistance(double x1, double y1, double x2, double y2) {
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    }
 }

@@ -48,7 +48,7 @@ export default function LandingPage() {
       const response = await fetch(`http://localhost:8080/api/v1/events`);
       if (response.ok) {
         const data = await response.json();
-        const event = data.find(event => event.eventDate === '08/31/2024');
+        const event = data.find(event => event.eventDate === '2024-08-31');
         if (event) {
           setEventDetail(event);
         } else {
@@ -104,15 +104,6 @@ export default function LandingPage() {
         </Typography>
         <Typography sx={{ mb: 1 }} >
           Email = {email}
-        </Typography>
-        <Typography sx={{ mb: 1 }} >
-          Student Coordinate = {studentData.studentCoordinate}
-        </Typography>
-        <Typography sx={{ mb: 1 }} >
-          Current Point = {studentData.studentPoint}
-        </Typography>
-        <Typography sx={{ mb: 1 }} color="text.primary">
-          Ranking No = {studentData.ranking}
         </Typography>
       </CardContent>
     </React.Fragment>

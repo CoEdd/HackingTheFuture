@@ -12,5 +12,9 @@ public interface ProgramJoinService {
     ProgramJoin updateProgramJoin(Long id, ProgramJoin programJoin);
     List<ProgramJoin> findByEmailRegisterAndEventTitle(String emailRegister, String eventTitle);
     boolean isEventClashing(String eventDate, String eventTime, String emailRegister); // Add this method
+    public boolean isEventClashing(String eventDate, String emailRegister);
+
+        // New method to update points
+        void updateUserPoints(String emailRegister, int points);
     
 }

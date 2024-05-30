@@ -7,11 +7,10 @@ import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import AppAppBar from '../studentpage/components/AppAppBar';
-import Hero from '../studentpage/components/Hero';
-import LogoCollection from '../studentpage/components/LogoCollection';
-import Highlights from '../studentpage/components/Highlights';
-import Features from '../studentpage/components/Features';
-import Testimonials from '../studentpage/components/Testimonials';
+import Hero from './components/Welcome';
+import Discussions from './components/Discussions';
+import StudentAccess from './components/StudentAccess';
+import Leaderboard from './components/Leaderboard';
 import FAQ from '../studentpage/components/FAQ';
 import Footer from '../studentpage/components/Footer';
 import getLPTheme from '../studentpage/getLPTheme';
@@ -196,12 +195,11 @@ export default function LandingPage() {
           </Box>
         </div>
 
-        <LogoCollection />
-        <Features />
+        <StudentAccess />
         <Divider />
-        <Testimonials />
+        <Leaderboard />
         <Divider />
-        <Highlights />
+        <Discussions />
         <Divider />
         <FAQ />
         <Divider />
@@ -240,11 +238,6 @@ function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
           },
         }}
       >
-        {/* <ToggleButton value>
-          <AutoAwesomeRoundedIcon sx={{ fontSize: '20px', mr: 1 }} />
-          Custom theme
-        </ToggleButton> */}
-        {/* <ToggleButton value={false}>Material Design 2</ToggleButton> */}
       </ToggleButtonGroup>
     </Box>
   );

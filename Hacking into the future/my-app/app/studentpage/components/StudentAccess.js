@@ -12,7 +12,6 @@ import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import DevicesRoundedIcon from '@mui/icons-material/DevicesRounded';
 import EdgesensorHighRoundedIcon from '@mui/icons-material/EdgesensorHighRounded';
 import ViewQuiltRoundedIcon from '@mui/icons-material/ViewQuiltRounded';
-// import { Link as RouterLink } from 'react-router-dom';
 import { useSearchParams } from 'next/navigation';
 
 const items = [
@@ -45,7 +44,7 @@ const items = [
   },
 ];
 
-export default function Features() {
+export default function StudentAccess() {
 
   const searchParams = useSearchParams();
   const Name = searchParams.get("Name");
@@ -60,7 +59,7 @@ export default function Features() {
   const selectedFeature = items[selectedItemIndex];
 
   return (
-    <Container id="features" sx={{ py: { xs: 8, sm: 16 } }}>
+    <Container id="StudentAccess" sx={{ py: { xs: 8, sm: 16 } }}>
       <Grid container spacing={6}>
         <Grid item xs={12} md={6}>
           <div>

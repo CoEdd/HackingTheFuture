@@ -1,24 +1,15 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardContent from '@mui/material/CardContent';
-import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import { useTheme } from '@mui/system';
 import { DataGrid } from '@mui/x-data-grid';
 import { useState, useEffect } from 'react';
-
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
 import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
 
@@ -35,7 +26,7 @@ const columns = [
   { field: 'studentPoint', headerName: 'Current Point', sortable: false, width: 110 },
 ];
 
-export default function Testimonials() {
+export default function Leaderboard() {
   const [open, setOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const searchParams = useSearchParams();
@@ -54,7 +45,6 @@ export default function Testimonials() {
   };
 
   const [rows, setRows] = useState([]);
-  const theme = useTheme();
 
   useEffect(() => {
     const fetchRankedUsers = async () => {
@@ -108,7 +98,7 @@ export default function Testimonials() {
 
   return (
     <Container
-      id="testimonials"
+      id="Leaderboard"
       sx={{
         pt: { xs: 4, sm: 12 },
         pb: { xs: 8, sm: 16 },

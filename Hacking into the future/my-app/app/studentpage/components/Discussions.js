@@ -15,8 +15,6 @@ import {
   GridRowEditStopReasons,
 } from '@mui/x-data-grid';
 
-import { useTheme } from '@mui/material/styles';
-
 const initialRows = [];
 
 function EditToolbar({ setRows, setRowModesModel, name }) {
@@ -38,8 +36,7 @@ function EditToolbar({ setRows, setRowModesModel, name }) {
   );
 }
 
-export default function Highlights() {
-  const theme = useTheme();
+export default function Discussions() {
   const searchParams = useSearchParams();
   const name = searchParams.get("Name");
 
@@ -166,7 +163,7 @@ export default function Highlights() {
 
   return (
     <Box
-      id="highlights"
+      id="Discussions"
       sx={{
         pt: { xs: 4, sm: 12 },
         pb: { xs: 8, sm: 16 },
@@ -203,8 +200,6 @@ export default function Highlights() {
             width: '100%',
             '& .actions': { color: 'white' },
             '& .textPrimary': { color: 'white' },
-            // '& .name-cell': { color: theme.palette.mode === 'dark' ? 'white' : 'white' }, // Conditional color based on theme mode
-            // '& .discussion-cell': { color: theme.palette.mode === 'dark' ? 'white' : 'white' }, // Conditional color based on theme mode
           }}
         >
           <DataGrid

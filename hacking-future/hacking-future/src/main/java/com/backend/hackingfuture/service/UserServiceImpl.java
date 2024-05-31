@@ -1,5 +1,8 @@
 package com.backend.hackingfuture.service;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,6 +29,9 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(user, userEntity);
 
+        // Hash the password
+        userEntity.setPassword(hashPassword(user.getPassword()));
+
         // Assign random coordinates if not already set
         if (userEntity.getStudentcoordinate() == null) {
             String randomCoordinate = CoordinateUtils.generateRandomCoordinate();
@@ -38,11 +44,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        List<UserEntity> userEntities
-                = userRepository.findAll();
+        List<UserEntity> userEntities = userRepository.findAll();
 
-        List<User> users = userEntities
-                .stream()
+        List<User> users = userEntities.stream()
                 .map(userEntity -> new User(
                         userEntity.getId(),
                         userEntity.getFirstName(),
@@ -60,8 +64,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Long id) {
-        UserEntity userEntity
-                = userRepository.findById(id).get();
+        UserEntity userEntity = userRepository.findById(id).get();
         User user = new User(id, null, null, null, null, null, null, 0);
         BeanUtils.copyProperties(userEntity, user);
         return user;
@@ -69,19 +72,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteUser(Long id) {
-        UserEntity user =  userRepository.findById(id).get();
+        UserEntity user = userRepository.findById(id).get();
         userRepository.delete(user);
         return true;
     }
 
     @Override
     public User updateUser(Long id, User user) {
-        UserEntity userEntity =
-                userRepository.findById(id).get();
+        UserEntity userEntity = userRepository.findById(id).get();
         userEntity.setEmailId(user.getEmailId());
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());
-        userEntity.setPassword(user.getPassword());
+        userEntity.setPassword(hashPassword(user.getPassword()));
         userEntity.setRole(user.getRole()); // Set role from user object
 
         userRepository.save(userEntity);
@@ -105,5 +107,21 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-
+    private String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error hashing password", e);
+        }
+    }
 }

@@ -11,28 +11,18 @@ import Stack from '@mui/material/Stack';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
-import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
-import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
-import AddressForm from './AddressForm';
+import Event from './Event';
 import getCheckoutTheme from './getCheckoutTheme';
-import Info from './Info';
-import InfoMobile from './InfoMobile';
-import PaymentForm from './PaymentForm';
-import Review from './Review';
+import Quiz from './Quiz';
 import ToggleColorMode from './ToggleColorMode';
 import { useSearchParams , useRouter } from 'next/navigation';
 
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-import SaveIcon from '@mui/icons-material/Save';
-import CancelIcon from '@mui/icons-material/Close';
 
 function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
   return (
@@ -59,11 +49,6 @@ function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
           },
         }}
       >
-        {/* <ToggleButton value>
-          <AutoAwesomeRoundedIcon sx={{ fontSize: '20px', mr: 1 }} />
-          Custom theme
-        </ToggleButton>
-        <ToggleButton value={false}>Material Design 2</ToggleButton> */}
       </ToggleButtonGroup>
     </Box>
   );
@@ -88,11 +73,9 @@ const logoStyle = {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <AddressForm />;
-    // case 1:
-    //   return <PaymentForm />;
+      return <Event />;
     case 1:
-      return <Review />;
+      return <Quiz />;
     default:
       throw new Error('Unknown step');
   }
@@ -127,12 +110,6 @@ export default function Checkout() {
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
-  };
-
-  const handleFormSubmit = (formData) => {
-    // Here, you can use the formData as needed
-    console.log('Form Data:', formData);
-    // You can also post the form data to your desired endpoint using axios or any other method
   };
 
   return (
@@ -173,7 +150,7 @@ export default function Checkout() {
               Back to
               <img
                 src={
-                  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/61f12e6faf73568658154dae_SitemarkDefault..svg'
+                  '/qq.png'
                 }
                 style={logoStyle}
                 alt="Sitemark's logo"
@@ -234,7 +211,7 @@ export default function Checkout() {
                 Back to
                 <img
                   src={
-                    'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/61f12e6faf73568658154dae_SitemarkDefault..svg'
+                    '/qq.png'
                   }
                   style={logoStyle}
                   alt="Sitemark's logo"
@@ -299,7 +276,6 @@ export default function Checkout() {
                   {activeStep >= 2 ? '$144.97' : '$134.98'}
                 </Typography>
               </div>
-              <InfoMobile totalPrice={activeStep >= 2 ? '$144.97' : '$134.98'} />
             </CardContent>
           </Card>
           <Box
@@ -338,22 +314,8 @@ export default function Checkout() {
             </Stepper>
             {activeStep === steps.length ? (
               <Stack spacing={2} useFlexGap>
-                {/* <Typography variant="h1">📦</Typography> */}
-                {/* <Typography variant="h5">You have successfully created your event!</Typography> */}
                 <Typography variant="body1" color="text.secondary">
-                  {/* Your order number is
-                  <strong>&nbsp;#140396</strong>. We have emailed your order
-                  confirmation and will update you once its shipped. */}
                 </Typography>
-                {/* <Button
-                  variant="contained"
-                  sx={{
-                    alignSelf: 'start',
-                    width: { xs: '100%', sm: 'auto' },
-                  }}
-                >
-                  Go To My Event Created
-                </Button> */}
               </Stack>
             ) : (
               <React.Fragment>
@@ -429,7 +391,5 @@ export default function Checkout() {
         showCustomTheme={showCustomTheme}
       />
     </ThemeProvider>
-
-    
   );
 }

@@ -7,11 +7,10 @@ import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import AppAppBar from '../parentpage/components/AppAppBar';
-import Hero from '../parentpage/components/Hero';
-import LogoCollection from '../parentpage/components/LogoCollection';
-import Highlights from '../parentpage/components/Highlights';
-import Features from '../parentpage/components/Features';
-import Testimonials from '../parentpage/components/Testimonials';
+import Hero from './components/Welcome';
+import Discussions from './components/Discussions';
+import ParentAccess from './components/ParentAccess';
+import Testimonials from './components/Leaderboard';
 import FAQ from '../parentpage/components/FAQ';
 import Footer from '../parentpage/components/Footer';
 import getLPTheme from '../parentpage/getLPTheme';
@@ -67,24 +66,6 @@ export default function LandingPage() {
       const userResponse = await fetch(`http://localhost:8080/api/v1/users/email/${email}`);
       if (userResponse.ok) {
         const userData = await userResponse.json();
-        const { studentcoordinate, studentpoint } = userData;
-
-        const rankResponse = await fetch(`http://localhost:8080/api/v1/users/ranked`);
-        if (rankResponse.ok) {
-          const rankedData = await rankResponse.json();
-          const userRank = rankedData.find(user => user.email === email);
-          if (userRank) {
-            setStudentData({
-              studentCoordinate: studentcoordinate,
-              studentPoint: studentpoint,
-              ranking: userRank.id,
-            });
-          } else {
-            console.error('User rank not found');
-          }
-        } else {
-          console.error('Failed to fetch ranked users');
-        }
       } else {
         console.error('Failed to fetch user details');
       }
@@ -164,12 +145,11 @@ export default function LandingPage() {
           </Box>
         </div>
 
-        <LogoCollection />
-        <Features />
+        <ParentAccess />
         <Divider />
         <Testimonials />
         <Divider />
-        <Highlights />
+        <Discussions />
         <Divider />
         <FAQ />
         <Divider />

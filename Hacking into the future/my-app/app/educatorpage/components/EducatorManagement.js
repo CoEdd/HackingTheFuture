@@ -19,7 +19,7 @@ const items = [
     icon: <ViewQuiltRoundedIcon />,
     title: 'Event Page',
     description:
-      'This item could provide a snapshot of the most important metrics or data points related to the product.',
+      'View all scheduled events and quizzes, keeping you updated on upcoming activities and student engagements.',
     imageLight: 'url("/static/images/templates/templates-images/dash-light.png")',
     imageDark: 'url("/static/images/templates/templates-images/dash-dark.png")',
     path: '/eventpage',
@@ -28,7 +28,7 @@ const items = [
     icon: <EdgesensorHighRoundedIcon />,
     title: 'Events / Quizzes Created',
     description:
-      'This item could provide information about the mobile app version of the product.',
+      'Track and manage all the events and quizzes you have created, with detailed information and status updates.',
     imageLight: 'url("/static/images/templates/templates-images/mobile-light.png")',
     imageDark: 'url("/static/images/templates/templates-images/mobile-dark.png")',
     path: '/programcreated',
@@ -37,7 +37,7 @@ const items = [
     icon: <DevicesRoundedIcon />,
     title: 'Create Event / Quizz',
     description:
-      'This item could let users know the product is available on all platforms, such as web, mobile, and desktop.',
+      'Design new events and quizzes with user-friendly tools for engaging and interactive student content.',
     imageLight: 'url("/static/images/templates/templates-images/devices-light.png")',
     imageDark: 'url("/static/images/templates/templates-images/devices-dark.png")',
     path: '/createevent',
@@ -69,9 +69,9 @@ export default function EducatorManagement() {
               color="text.secondary"
               sx={{ mb: { xs: 2, sm: 4 } }}
             >
-              Here you can provide a brief overview of the key features of the
-              product. For example, you could list the number of features, the types
-              of features, add-ons, or the benefits of the features.
+              Access tools to manage your teaching activities: view the Event Page, track Events/Quizzes Created, 
+              and design new content in Create Event/Quiz.
+
             </Typography>
           </div>
           <Grid container item gap={1} sx={{ display: { xs: 'auto', sm: 'none' } }}>

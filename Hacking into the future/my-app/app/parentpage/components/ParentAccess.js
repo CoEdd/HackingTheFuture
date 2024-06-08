@@ -19,7 +19,7 @@ const items = [
     icon: <ViewQuiltRoundedIcon />,
     title: 'Event / Quiz Page',
     description:
-      'This is a page where the Events and the Quizzes created by the educator are displayed. ',
+      'View events and quizzes created by educators.',
     imageLight: 'url("/static/images/templates/templates-images/dash-light.png")',
     imageDark: 'url("/static/images/templates/templates-images/dash-dark.png")',
     path: '/eventpage',
@@ -28,7 +28,7 @@ const items = [
     icon: <EdgesensorHighRoundedIcon />,
     title: 'Trip Booking Page',
     description:
-      'This is where you can book a trip for your beloved children.',
+      'Book trips for your children to exciting and educational destinations.',
     imageLight: 'url("/static/images/templates/templates-images/mobile-light.png")',
     imageDark: 'url("/static/images/templates/templates-images/mobile-dark.png")',
     path: '/tripbookingpage',
@@ -37,7 +37,7 @@ const items = [
     icon: <DevicesRoundedIcon />,
     title: 'View Child',
     description:
-      'This is where you can see the list of your children.',
+      'See and manage the list of your children.',
     imageLight: 'url("/static/images/templates/templates-images/devices-light.png")',
     imageDark: 'url("/static/images/templates/templates-images/devices-dark.png")',
     path: '/viewchild',
@@ -71,7 +71,7 @@ export default function ParentAccess() {
               color="text.secondary"
               sx={{ mb: { xs: 2, sm: 4 } }}
             >
-              Add your children from the view profile so that you can book an event for them so that they can grow as a useful child for yaa.
+              Manage your child's activities and bookings with ease. Add your children to your profile and book events to help them grow and learn.
             </Typography>
           </div>
           <Grid container item gap={1} sx={{ display: { xs: 'auto', sm: 'none' } }}>

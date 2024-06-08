@@ -57,8 +57,8 @@ export default function Hero() {
             color="text.secondary"
             sx={{ alignSelf: 'center', width: { sm: '100%', md: '80%' } }}
           >
-            Create Event Page to create an event, access
-            Create Quiz page to create quizzes
+            Empower Minds, Inspire Futures. Create engaging quizzes and events 
+            to ignite young minds and shape the future of education.
           </Typography>
         </Stack>
       </Container>

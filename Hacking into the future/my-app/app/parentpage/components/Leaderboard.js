@@ -74,7 +74,7 @@ export default function Leaderboard() {
               childemail: selectedUser.email,
               status: 'childpending',
             });
-            alert("Your request is still in process. Ask your child to approve you as a parent.");
+            alert("Child is added succesfully.");
             console.log('Child request sent:', response.data);
           }
         }

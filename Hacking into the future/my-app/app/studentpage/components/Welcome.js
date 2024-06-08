@@ -57,7 +57,8 @@ export default function Hero() {
             color="text.secondary"
             sx={{ alignSelf: 'center', width: { sm: '100%', md: '80%' } }}
           >
-            Register to an event and attempt quiz to earn more point.
+            Welcome to your Student Dashboard! Here, you can explore and 
+            participate in various events and quizzes to enhance your learning experience.
           </Typography>
         </Stack>
       </Container>

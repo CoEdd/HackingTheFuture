@@ -65,7 +65,7 @@ export default function Hero() {
             color="text.secondary"
             sx={{ alignSelf: 'center', width: { sm: '100%', md: '80%' } }}
           >
-            Answer quizz 
+            Empowering Tomorrow's Innovators, Today
           </Typography>
           <Stack
             direction={{ xs: 'column', sm: 'row' }}

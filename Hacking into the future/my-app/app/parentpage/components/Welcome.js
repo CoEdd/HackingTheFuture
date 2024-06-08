@@ -57,7 +57,8 @@ export default function Welcome() {
             color="text.secondary"
             sx={{ alignSelf: 'center', width: { sm: '100%', md: '80%' } }}
           >
-            Book an event for your beloved child.
+            View and manage your child's profile, and add new children to your account.
+            Stay engaged in your child's learning journey and make the most of these features.
           </Typography>
         </Stack>
       </Container>
